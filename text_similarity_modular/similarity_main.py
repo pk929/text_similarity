@@ -47,17 +47,15 @@ class TextSimilarity(object):
                 JACCARD:杰卡德相似度算法
 
                 SHORT_TEXT:短文本相似度算法
-                VOICE_TO_SHORT_TEXT:语音转文字短文本相似度算法
         :param kwargs: 参数集合
             value:
                 inclusion_relation: 包含关系匹配开关。yes：开启，no：关闭（默认）
-                    注意：只判断文本二中是否包含了文本一。
+                    注意：只判断text_two中是否包含text_one。
                     可使用算法：
                         SHORT_TEXT
-                        VOICE_TO_SHORT_TEXT
                 pinyin_conversion: 拼音转换开关。yes：转换成拼音后再进行匹配，no：原字符匹配（默认）
                     可使用算法：
-                        VOICE_TO_SHORT_TEXT
+                        SHORT_TEXT
         :return:
         """
 
@@ -80,8 +78,6 @@ class TextSimilarity(object):
                 elif algorithm_type == 'SHORT_TEXT':
                     similarity = short_text_sim(text_one, text_two, self.stopwords,  **kwargs)
 
-                elif algorithm_type == 'VOICE_TO_SHORT_TEXT':
-                    similarity = voice_to_short_text_sim(text_one, text_two, **kwargs)
 
         except Exception as e:
             print(str(e))

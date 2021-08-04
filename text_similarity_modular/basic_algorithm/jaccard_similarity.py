@@ -34,6 +34,3 @@ def jaccard_sim(str_list1, str_list2):
 def __add_space(s):
     return ' '.join(list(s))
 
-
-def __add_space_pinyin(s):
-    return ' '.join(s.split("-"))
