@@ -5,15 +5,13 @@
 
 # 系统包
 from collections import Counter
-import jieba
-import jieba.analyse
 import numpy as np
 
 # 自定义包
 from text_similarity_modular.common import *
 
 
-def cosine_similarity(str_list1, str_list2):
+def cosine_sim(str_list1, str_list2):
     """
     计算余弦相似度
     :param str_list1: 句一列表

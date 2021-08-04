@@ -7,4 +7,4 @@
 
 # 自定义包
 
-from text_similarity_modular.similarity_main import get_text_similarity
+from text_similarity_modular.similarity_main import TextSimilarity

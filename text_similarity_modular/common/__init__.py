@@ -5,6 +5,5 @@
 
 # 系统包
 
-#自定义包
-
-from .utils import *
+# 自定义包
+from text_similarity_modular.common.utils import *

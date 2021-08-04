@@ -4,6 +4,7 @@
 # @Time: 2021/7/30
 
 # 系统包
+import os
 import jieba
 
 
@@ -11,7 +12,7 @@ import jieba
 
 def text_processing_one(text_one, text_two, stopwords):
     """
-    文本处理一：对传入文本进行分词、去除停用词处理
+    文本处理一：对传入文本进行添加自定义词库、分词、去除停用词处理
     :param text_one: 文本一
     :param text_two: 文本二
     :param stopwords: 停用词
@@ -26,21 +27,36 @@ def text_processing_one(text_one, text_two, stopwords):
     return str_list1, str_list2
 
 
-def is_included(text_one=None, text_two=None):
+def is_included(included_text=None, text=None):
     """
-    全包含关系匹配，匹配main_str中是是否包含有secondary_str
-    :param text_one: 字符串1
-    :param text_two: 字符串2
+    全包含关系匹配，匹配text中是否含有included_text
+    :param included_text: 被包含文本
+    :param text: 包含文本
     :return:
     """
     flag = False
     try:
-        if text_one in text_two or text_two in text_one:
+        if included_text in text:
             flag = True
     except Exception as e:
         raise e
     finally:
         return flag
+
+
+def read_words(file_path):
+    """
+    按行读取文本
+    :param file_path: 文件路径
+    :return:
+    """
+    words = []
+    try:
+        words = [line.strip() for line in open(file_path, 'r', encoding='utf-8').readlines()]
+    except Exception as e:
+        raise e
+    finally:
+        return words
 
 
 def move_stopwords(sentence, stopwords):

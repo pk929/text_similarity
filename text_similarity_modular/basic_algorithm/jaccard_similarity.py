@@ -6,13 +6,11 @@
 # 系统包
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
-import jieba
 
 # 自定义包
-from text_similarity_modular.common import *
 
 
-def jaccard_similarity(str_list1, str_list2):
+def jaccard_sim(str_list1, str_list2):
     """
     计算杰卡德相似度
     :param str_list1: 句一列表

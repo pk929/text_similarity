@@ -6,5 +6,5 @@
 # 系统包
 
 # 自定义包
-from .cosine_similarity import *
-from .jaccard_similarity import *
+from text_similarity_modular.basic_algorithm.cosine_similarity import *
+from text_similarity_modular.basic_algorithm.jaccard_similarity import *
