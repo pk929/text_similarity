@@ -46,6 +46,7 @@ class TextSimilarity(object):
                 COSINE:余弦相似度算法
                 KEYWORD_COSINE:基于关键词的余弦相似度算法
                 JACCARD:杰卡德相似度算法
+                KEYWORD_JACCARD:基于关键词的杰卡德相似度算法
 
                 SHORT_TEXT:短文本相似度算法
         :param kwargs: 参数集合
@@ -59,7 +60,7 @@ class TextSimilarity(object):
                         SHORT_TEXT
                 cut_all: jieba分词模式开关。True：全模式，False：精确模式
                     可使用算法：(可适用于所有使用jieba分词的算法)
-                        COSINE\KEYWORD_COSINE\JACCARD\SHORT_TEXT
+                        COSINE\KEYWORD_COSINE\JACCARD\KEYWORD_JACCARD\SHORT_TEXT
         :return:
         """
 
@@ -81,6 +82,9 @@ class TextSimilarity(object):
                 elif algorithm_type == 'JACCARD':
                     str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords, **kwargs)
                     similarity = jaccard_sim(str_list1, str_list2)
+
+                elif algorithm_type == 'KEYWORD_JACCARD':
+                    similarity = keyword_jaccard_sim(text_one, text_two, self.stopWord_path, **kwargs)
 
                 elif algorithm_type == 'SHORT_TEXT':
                     similarity = short_text_sim(text_one, text_two, self.stopwords, **kwargs)

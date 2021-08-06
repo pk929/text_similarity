@@ -14,7 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def keyword_cosine_sim(text_one, text_two, stopWord_path, **kwargs):
     """
-    余弦相似度算法
+    基于关键词的余弦相似度算法
         对语句先设置停用词，再提取关键词列表，然后根据交集、并集产生词向量，最后计算两个向量的余弦值。
     :param text_one: 文本一
     :param text_two: 文本二
