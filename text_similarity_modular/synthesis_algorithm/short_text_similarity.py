@@ -27,16 +27,16 @@ def short_text_sim(str_input1, str_input2, stopwords, **kwargs):
     inclusion_relation = kwargs.get('inclusion_relation')  # 包含关系匹配开关
     pinyin_conversion = kwargs.get('pinyin_conversion')  # 拼音开关
 
-    if pinyin_conversion == 'yes':
+    if pinyin_conversion:
         text_pin1 = pinyin.get_pinyin(str_input1)
         text_pin2 = pinyin.get_pinyin(str_input2)
-        if inclusion_relation == 'yes':
+        if inclusion_relation:
             isInclude = is_included(included_text=text_pin1, text=text_pin2)
             if isInclude:
                 return 1.0
 
         # 文本处理
-        str_list_pin1, str_list_pin2 = text_processing_one(text_pin1, text_pin2, stopwords)
+        str_list_pin1, str_list_pin2 = text_processing_one(text_pin1, text_pin2, stopwords, **kwargs)
 
         similarity_cosine = cosine_sim(str_list_pin1, str_list_pin2)
         similarity_jaccard = jaccard_sim(str_list_pin1, str_list_pin2)
@@ -46,12 +46,12 @@ def short_text_sim(str_input1, str_input2, stopwords, **kwargs):
             return similarity_jaccard
 
     else:
-        if inclusion_relation == 'yes':
+        if inclusion_relation:
             isInclude = is_included(included_text=str_input1, text=str_input2)
             if isInclude:
                 return 1.0
         # 文本处理
-        str_list1, str_list2 = text_processing_one(str_input1, str_input2, stopwords)
+        str_list1, str_list2 = text_processing_one(str_input1, str_input2, stopwords, **kwargs)
 
         similarity_cosine = cosine_sim(str_list1, str_list2)
         similarity_jaccard = jaccard_sim(str_list1, str_list2)

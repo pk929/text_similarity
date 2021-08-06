@@ -8,3 +8,4 @@
 # 自定义包
 from text_similarity_modular.basic_algorithm.cosine_similarity import *
 from text_similarity_modular.basic_algorithm.jaccard_similarity import *
+from text_similarity_modular.basic_algorithm.cosine_keyword_similarity import *

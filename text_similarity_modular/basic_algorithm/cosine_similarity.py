@@ -11,9 +11,10 @@ import numpy as np
 from text_similarity_modular.common import *
 
 
-def cosine_sim(str_list1, str_list2):
+def cosine_sim(str_list1, str_list2, **kwargs):
     """
-    计算余弦相似度
+    余弦相似度算法
+        对语句先进行分词操作，再去除停用词，然后根据交集、并集产生词向量，最后计算两个向量的余弦值。
     :param str_list1: 句一列表
     :param str_list2: 句二列表
     :return:

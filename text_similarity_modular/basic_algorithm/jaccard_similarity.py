@@ -10,7 +10,7 @@ import numpy as np
 # 自定义包
 
 
-def jaccard_sim(str_list1, str_list2):
+def jaccard_sim(str_list1, str_list2, **kwargs):
     """
     计算杰卡德相似度
     :param str_list1: 句一列表

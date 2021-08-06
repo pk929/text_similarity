@@ -44,18 +44,22 @@ class TextSimilarity(object):
         :param algorithm_type: 所用算法类型，默认使用余弦相似度算法
             value:
                 COSINE:余弦相似度算法
+                KEYWORD_COSINE:基于关键词的余弦相似度算法
                 JACCARD:杰卡德相似度算法
 
                 SHORT_TEXT:短文本相似度算法
         :param kwargs: 参数集合
             value:
-                inclusion_relation: 包含关系匹配开关。yes：开启，no：关闭（默认）
+                inclusion_relation: 包含关系匹配开关。True：开启，False：关闭（默认）
                     注意：只判断text_two中是否包含text_one。
                     可使用算法：
                         SHORT_TEXT
-                pinyin_conversion: 拼音转换开关。yes：转换成拼音后再进行匹配，no：原字符匹配（默认）
+                pinyin_conversion: 拼音转换开关。True：转换成拼音后再进行匹配，False：原字符匹配（默认）
                     可使用算法：
                         SHORT_TEXT
+                cut_all: jieba分词模式开关。True：全模式，False：精确模式
+                    可使用算法：(可适用于所有使用jieba分词的算法)
+                        COSINE\KEYWORD_COSINE\JACCARD\SHORT_TEXT
         :return:
         """
 
@@ -68,15 +72,18 @@ class TextSimilarity(object):
 
             else:
                 if algorithm_type == 'COSINE':
-                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords)
+                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords, **kwargs)
                     similarity = cosine_sim(str_list1, str_list2)
 
+                elif algorithm_type == 'KEYWORD_COSINE':
+                    similarity = keyword_cosine_sim(text_one, text_two, self.stopWord_path, **kwargs)
+
                 elif algorithm_type == 'JACCARD':
-                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords)
+                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords, **kwargs)
                     similarity = jaccard_sim(str_list1, str_list2)
 
                 elif algorithm_type == 'SHORT_TEXT':
-                    similarity = short_text_sim(text_one, text_two, self.stopwords,  **kwargs)
+                    similarity = short_text_sim(text_one, text_two, self.stopwords, **kwargs)
 
 
         except Exception as e:
