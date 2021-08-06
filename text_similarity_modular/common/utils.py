@@ -10,7 +10,7 @@ import jieba
 
 # 自定义包
 
-def text_processing_one(text_one, text_two, stopwords):
+def text_processing_one(text_one, text_two, stopwords, **kwargs):
     """
     文本处理一：对传入文本进行添加自定义词库、分词、去除停用词处理
     :param text_one: 文本一
@@ -18,9 +18,12 @@ def text_processing_one(text_one, text_two, stopwords):
     :param stopwords: 停用词
     :return:
     """
+    cut_all = kwargs.get('cut_all')  # 全分词开关
+    cut_all = True if cut_all is True or cut_all == 'True' else False
+
     # 分词
-    str_list1 = jieba.lcut(text_one)
-    str_list2 = jieba.lcut(text_two)
+    str_list1 = jieba.lcut(text_one, cut_all=cut_all)
+    str_list2 = jieba.lcut(text_two, cut_all=cut_all)
     # 去除停用词
     str_list1 = move_stopwords(str_list1, stopwords)
     str_list2 = move_stopwords(str_list2, stopwords)
