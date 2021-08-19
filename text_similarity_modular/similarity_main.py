@@ -58,6 +58,9 @@ class TextSimilarity(object):
                 pinyin_conversion: 拼音转换开关。True：转换成拼音后再进行匹配，False：原字符匹配（默认）
                     可使用算法：
                         SHORT_TEXT
+                similarity_threshold: 相似度阀值。默认为0.7
+                    可使用算法：
+                        SHORT_TEXT
                 cut_all: jieba分词模式开关。True：全模式，False：精确模式
                     可使用算法：(可适用于所有使用jieba分词的算法)
                         COSINE\KEYWORD_COSINE\JACCARD\KEYWORD_JACCARD\SHORT_TEXT
@@ -73,14 +76,16 @@ class TextSimilarity(object):
 
             else:
                 if algorithm_type == 'COSINE':
-                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords, **kwargs)
+                    str_list1 = text_processing_one(text_one, self.stopwords, **kwargs)
+                    str_list2 = text_processing_one(text_two, self.stopwords, **kwargs)
                     similarity = cosine_sim(str_list1, str_list2)
 
                 elif algorithm_type == 'KEYWORD_COSINE':
                     similarity = keyword_cosine_sim(text_one, text_two, self.stopWord_path, **kwargs)
 
                 elif algorithm_type == 'JACCARD':
-                    str_list1, str_list2 = text_processing_one(text_one, text_two, self.stopwords, **kwargs)
+                    str_list1 = text_processing_one(text_one, self.stopwords, **kwargs)
+                    str_list2 = text_processing_one(text_two, self.stopwords, **kwargs)
                     similarity = jaccard_sim(str_list1, str_list2)
 
                 elif algorithm_type == 'KEYWORD_JACCARD':
